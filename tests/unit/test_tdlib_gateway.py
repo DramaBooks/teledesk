@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from teledesk.integrations.tdlib.gateway import TdlibGateway
+from easygram.integrations.tdlib.gateway import TdlibGateway
 
 
 def test_candidate_library_paths_include_common_tdjson_locations(tmp_path: Path) -> None:

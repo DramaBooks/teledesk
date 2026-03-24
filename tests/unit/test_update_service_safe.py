@@ -1,7 +1,7 @@
 import requests
 
-from teledesk.domain.updates import ReleaseInfo
-from teledesk.services.update_service import UpdateService
+from easygram.domain.updates import ReleaseInfo
+from easygram.services.update_service import UpdateService
 
 
 class FailingClient:

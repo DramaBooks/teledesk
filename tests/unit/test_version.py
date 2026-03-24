@@ -1,4 +1,4 @@
-from teledesk.config.version import AppVersion
+from easygram.config.version import AppVersion
 
 
 def test_version_comparison_detects_newer_release() -> None:

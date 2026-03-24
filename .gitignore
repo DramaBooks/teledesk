@@ -14,7 +14,7 @@ venv/
 build/*
 !build/pyinstaller/
 build/pyinstaller/*
-!build/pyinstaller/teledesk.spec
+!build/pyinstaller/easygram.spec
 dist/
 *.spec.bak
 *.egg-info/

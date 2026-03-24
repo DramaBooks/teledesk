@@ -1,6 +1,6 @@
-# Teledesk
+# Easygram
 
-Teledesk is an accessible Windows Telegram client built with `wxPython`, `TDLib`, and a dedicated accessibility layer designed for screen readers and braille output.
+Easygram is an accessible Windows Telegram client built with `wxPython`, `TDLib`, and a dedicated accessibility layer designed for screen readers and braille output.
 
 ## Current status
 
@@ -22,7 +22,7 @@ This repository is in active bootstrap. The initial implementation focuses on:
 
 ## Repository and release strategy
 
-- Repository name: `teledesk`
+- Repository name: `easygram`
 - Recommended visibility: public
 - Binary distribution: GitHub Releases assets
 - Packaging: PyInstaller one-folder bundle zipped as portable app
@@ -32,10 +32,12 @@ This repository is in active bootstrap. The initial implementation focuses on:
 
 Copy `.env.example` to `.env` and fill in the Telegram API credentials.
 
-- `TELEDESK_TG_API_ID`
-- `TELEDESK_TG_API_HASH`
-- `TELEDESK_GITHUB_OWNER`
-- `TELEDESK_GITHUB_REPO`
+- `EASYGRAM_TG_API_ID`
+- `EASYGRAM_TG_API_HASH`
+- `EASYGRAM_GITHUB_OWNER`
+- `EASYGRAM_GITHUB_REPO`
+
+Legacy `TELEDESK_*` variables are still accepted for compatibility during the rename transition.
 
 ## Development notes
 
@@ -77,10 +79,10 @@ Why:
 
 1. Tag a version.
 2. GitHub Actions builds the Windows portable bundle.
-3. The workflow zips the `dist/teledesk/` folder.
+3. The workflow zips the `dist/easygram/` folder.
 4. Checksums and metadata are generated.
 5. Assets are attached to a GitHub Release.
-6. Teledesk checks the latest release and prompts users to update.
+6. Easygram checks the latest release and prompts users to update.
 
 ## Testing goals
 

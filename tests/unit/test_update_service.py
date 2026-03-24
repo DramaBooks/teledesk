@@ -1,5 +1,5 @@
-from teledesk.domain.updates import ReleaseAsset, ReleaseInfo
-from teledesk.services.update_service import UpdateService
+from easygram.domain.updates import ReleaseAsset, ReleaseInfo
+from easygram.services.update_service import UpdateService
 
 
 class DummyClient:
@@ -16,13 +16,13 @@ def test_select_portable_asset_prefers_portable_zip() -> None:
         prerelease=False,
         assets=[
             ReleaseAsset(
-                name="teledesk-symbols.zip",
+                name="easygram-symbols.zip",
                 download_url="https://example.invalid/symbols",
                 size=10,
                 content_type="application/zip",
             ),
             ReleaseAsset(
-                name="teledesk-portable-v0.2.0-windows-x64.zip",
+                name="easygram-portable-v0.2.0-windows-x64.zip",
                 download_url="https://example.invalid/portable",
                 size=100,
                 content_type="application/zip",

@@ -30,7 +30,7 @@ jobs:
       - name: Build portable bundle
         shell: pwsh
         run: |
-          pyinstaller build/pyinstaller/teledesk.spec --noconfirm --clean
+          pyinstaller build/pyinstaller/easygram.spec --noconfirm --clean
 
       - name: Package portable zip
         shell: pwsh
@@ -41,7 +41,7 @@ jobs:
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: teledesk-portable
+          name: easygram-portable
           path: |
             dist/*.zip
             dist/*.sha256

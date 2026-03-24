@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "teledesk"
+name = "easygram"
 version = "0.1.0"
 description = "Accessible Windows Telegram client built with wxPython, TDLib, and portable GitHub releases."
 readme = "README.md"
@@ -41,10 +41,10 @@ dev = [
 ]
 
 [project.scripts]
-teledesk = "teledesk.app:main"
+easygram = "easygram.app:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/teledesk"]
+packages = ["src/easygram"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
