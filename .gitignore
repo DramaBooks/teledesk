@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Build outputs
+build/*
+!build/pyinstaller/
+build/pyinstaller/*
+!build/pyinstaller/teledesk.spec
+dist/
+*.spec.bak
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Environment
+.env
+
+# Runtime / logs
+*.log
+.tmp/
+.temp/
+state/
+releases/
+
+# TDLib runtime and data
+vendor/tdlib/bin/
+vendor/tdlib/build/
+.tdlib/

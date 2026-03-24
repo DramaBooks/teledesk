@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "teledesk"
+version = "0.1.0"
+description = "Accessible Windows Telegram client built with wxPython, TDLib, and portable GitHub releases."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+  { name = "Germano" }
+]
+keywords = ["telegram", "wxpython", "accessibility", "windows", "portable"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications :: Chat",
+  "Topic :: Desktop Environment"
+]
+dependencies = [
+  "accessible-output2>=0.17",
+  "packaging>=24.2",
+  "requests>=2.32.3",
+  "wxPython>=4.2.1"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pyinstaller>=6.13.0",
+  "pytest>=8.3.5",
+  "pytest-cov>=6.1.1",
+  "ruff>=0.11.2"
+]
+
+[project.scripts]
+teledesk = "teledesk.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/teledesk"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
