@@ -15,11 +15,12 @@ GITHUB_API_BASE = "https://api.github.com"
 class GitHubReleasesClient:
     owner: str
     repo: str
+    api_base: str = GITHUB_API_BASE
     timeout: float = 10.0
 
     def latest_release(self) -> ReleaseInfo:
         response = requests.get(
-            f"{GITHUB_API_BASE}/repos/{self.owner}/{self.repo}/releases/latest",
+            f"{self.api_base}/repos/{self.owner}/{self.repo}/releases/latest",
             headers={"Accept": "application/vnd.github+json"},
             timeout=self.timeout,
         )

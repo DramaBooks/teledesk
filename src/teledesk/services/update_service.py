@@ -6,6 +6,7 @@ import hashlib
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Final
 
 import requests  # type: ignore[import-not-found]
 
@@ -22,6 +23,8 @@ class DownloadedRelease:
 
 
 class UpdateService:
+    PORTABLE_PLATFORM_HINT: Final[str] = "windows-x64"
+
     def __init__(self, releases_client: GitHubReleasesClient) -> None:
         self.releases_client = releases_client
 
@@ -43,10 +46,32 @@ class UpdateService:
             reason="Already on latest version.",
         )
 
+    def check_for_updates_safely(self) -> UpdateCheckResult:
+        current = current_version()
+        try:
+            return self.check_for_updates()
+        except requests.RequestException as exc:
+            return UpdateCheckResult(
+                update_available=False,
+                current_version=current.raw,
+                reason=f"Update check failed: {exc}",
+            )
+        except Exception as exc:
+            return UpdateCheckResult(
+                update_available=False,
+                current_version=current.raw,
+                reason=f"Unexpected update error: {exc}",
+            )
+
     def select_portable_asset(self, release: ReleaseInfo) -> ReleaseAsset | None:
+        preferred: list[ReleaseAsset] = []
         for asset in release.assets:
-            if asset.is_portable_bundle:
-                return asset
+            lowered = asset.name.lower()
+            if asset.is_portable_bundle and self.PORTABLE_PLATFORM_HINT in lowered:
+                preferred.append(asset)
+        if preferred:
+            preferred.sort(key=lambda item: item.size, reverse=True)
+            return preferred[0]
         return None
 
     def download_release(self, release: ReleaseInfo, asset: ReleaseAsset) -> DownloadedRelease:

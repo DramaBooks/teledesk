@@ -28,6 +28,10 @@ class ReleaseInfo:
     prerelease: bool
     assets: list[ReleaseAsset]
 
+    @property
+    def version(self) -> str:
+        return self.tag_name.removeprefix("v")
+
 
 @dataclass(frozen=True, slots=True)
 class UpdateCheckResult:

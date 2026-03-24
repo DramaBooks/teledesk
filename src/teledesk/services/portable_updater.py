@@ -7,10 +7,21 @@ can exit before files are replaced.
 from __future__ import annotations
 
 import subprocess
+import tempfile
 from pathlib import Path
+from zipfile import ZipFile
 
 
 class PortableUpdater:
+    def extract_archive(self, archive_path: Path) -> Path:
+        extract_root = Path(tempfile.mkdtemp(prefix="teledesk-update-extract-"))
+        with ZipFile(archive_path) as archive:
+            archive.extractall(extract_root)
+        candidates = [path for path in extract_root.iterdir() if path.is_dir()]
+        if len(candidates) == 1:
+            return candidates[0]
+        return extract_root
+
     def create_replace_script(
         self,
         *,
@@ -36,3 +47,21 @@ class PortableUpdater:
 
     def launch_replace_script(self, script_path: Path) -> None:
         subprocess.Popen(["cmd.exe", "/c", str(script_path)], close_fds=True)
+
+    def apply_portable_update(
+        self,
+        *,
+        archive_path: Path,
+        install_dir: Path,
+        executable_name: str,
+    ) -> Path:
+        extracted_dir = self.extract_archive(archive_path)
+        script_path = archive_path.parent / "apply_teledesk_update.cmd"
+        self.create_replace_script(
+            install_dir=install_dir,
+            extracted_dir=extracted_dir,
+            executable_name=executable_name,
+            script_path=script_path,
+        )
+        self.launch_replace_script(script_path)
+        return script_path
